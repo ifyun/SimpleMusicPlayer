@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMusicPlayer", "SimpleMusicPlayer\SimpleMusicPlayer.csproj", "{855A02C3-8C34-46CB-A20A-63DD74DDE0FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE0A16AF-8A0F-4D27-B7F7-69332D2406AF}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{855A02C3-8C34-46CB-A20A-63DD74DDE0FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{855A02C3-8C34-46CB-A20A-63DD74DDE0FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{855A02C3-8C34-46CB-A20A-63DD74DDE0FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{855A02C3-8C34-46CB-A20A-63DD74DDE0FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {196E0662-4BD7-475C-9149-188188EFFBEC}
+	EndGlobalSection
+EndGlobal
