@@ -1,5 +1,4 @@
-﻿using Id3Lib;
-using Mp3Lib;
+﻿using Mp3Lib;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
@@ -16,6 +15,8 @@ namespace SimpleMusicPlayer
     /// </summary>
     partial class MainWindow
     {
+        private string SavePath = "./Data/Musics.json";
+
         private BitmapImage BitmapToBitmapImage(Bitmap bitmap)
         {
             var bitmapImage = new BitmapImage();
@@ -41,6 +42,7 @@ namespace SimpleMusicPlayer
             {
                 try
                 {
+                    // Read musics from json file.
                     using (var file = new StreamReader(SavePath))
                     {
                         string musics = file.ReadToEnd();
@@ -58,6 +60,7 @@ namespace SimpleMusicPlayer
                     {
                         try
                         {
+                            // Read ID3Tag from mp3 file.
                             var tag = new Mp3File(Musics[i].Path).TagHandler;
                             Musics[i].AlbumImage = BitmapToBitmapImage(new Bitmap(tag.Picture));
                         }
@@ -69,13 +72,18 @@ namespace SimpleMusicPlayer
                     }
                     else
                     {
+                        // Remove the music of which path doesn't exist.
                         Musics.RemoveAt(i);
                         i--;
                     }
                 }
-
                 MusicList.DataContext = Musics;
                 SaveMusicList();
+            }
+            else if (!Directory.Exists("./Data"))
+            {
+                Directory.CreateDirectory("./Data");
+                File.Create(SavePath);
             }
         }
 
@@ -149,6 +157,7 @@ namespace SimpleMusicPlayer
 
                 AlbumImage.Source = Musics[index].AlbumImage != null ?
                     Musics[index].AlbumImage : new BitmapImage(new Uri("./Images/Start.jpg", UriKind.Relative));
+                // Update the title of window.
                 this.Title = TITLE_STR + " - " + Musics[index].Title;
                 CurrentTitle.Text = Musics[index].Title;
                 CurrentArtist.Text = Musics[index].Artist;
@@ -175,6 +184,7 @@ namespace SimpleMusicPlayer
             }
             else
             {
+                // Path doesn't exist, find from List and remove it.
                 var index = Musics.ToList().FindIndex(a => a.Path.Equals(path));
 
                 if (index != -1)

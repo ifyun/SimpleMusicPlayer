@@ -124,6 +124,7 @@
     </ApplicationDefinition>
     <Compile Include="Converter\SelectToFontWeight.cs" />
     <Compile Include="Converter\SelectToForeground.cs" />
+    <Compile Include="RepeatMode.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

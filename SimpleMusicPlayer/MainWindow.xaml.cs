@@ -13,9 +13,9 @@ namespace SimpleMusicPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string SavePath = "./Data/musics.json";
         private readonly DispatcherTimer timer = new DispatcherTimer();
         private PlayState State = PlayState.NONE;
+        private RepeatMode Mode = RepeatMode.REPEAT_OFF;
         private bool IsListOpen = false;
         private int CurrentIndex = -1;
 
@@ -87,6 +87,16 @@ namespace SimpleMusicPlayer
             CurrentTime.Text = TimeSpan.FromSeconds(Progress.Value).ToString(@"mm\:ss");
             timer.Stop();
             State = PlayState.STOP;
+
+            switch (Mode)
+            {
+                case RepeatMode.REPEAT_ONE:
+                    PlaySelected(CurrentIndex);
+                    break;
+                case RepeatMode.REPEAT_LIST:
+                    NextButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent, NextButton));
+                    break;
+            }
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -181,6 +191,25 @@ namespace SimpleMusicPlayer
         private void Player_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
             Console.WriteLine("Can not play.");
+        }
+
+        private void RepeatButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch(Mode)
+            {
+                case RepeatMode.REPEAT_OFF:
+                    Mode = RepeatMode.REPEAT_ONE;
+                    RepeatIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.RepeatOne;
+                    break;
+                case RepeatMode.REPEAT_ONE:
+                    Mode = RepeatMode.REPEAT_LIST;
+                    RepeatIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Repeat;
+                    break;
+                case RepeatMode.REPEAT_LIST:
+                    Mode = RepeatMode.REPEAT_OFF;
+                    RepeatIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.RepeatOff;
+                    break;
+            }
         }
     }
 }
